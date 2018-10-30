@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>아이템 셔플하기</title>
+	<style>
+		.apple{width:200px; height:300px; background: #CCC; top: 20px;
+			position: absolute; transition: all 1s;}
+		.apple:hover{ opacity: 0.5; }
+		button{position: absolute;top:350px; left:470px; width:100px; height:30px; border-radius: 3px; border:none; background: #0F5}
+		button:hover{ background: black; color:white; cursor:pointer;  }
+		button:focus{outline:none;}
+		body{margin:0;}	
+	</style>
+</head>
+<body>
+	<div class="apple">1title1</div>
+	<div class="apple">2title2</div>
+	<div class="apple">3title3</div>
+	<div class="apple">4title4</div>
+	<div class="apple">5title5</div>
+	<button onclick="shuffleArray('apple',210)">shuffle</button>
+	<script type="text/javascript">
+	//쓰기 쉽게 함수로 만들었습니다. 클래스이름과 아이템 간격을 인자로 실행합니다.
+	shuffleArray("apple",210);
+
+	function shuffleArray(cName,gap){
+		var t = document.getElementsByClassName(cName);
+
+		//클래스 숫자만큼 배열을 만들고 간격의 배수로 left값을 설정
+		var j = [];  
+		for(var i=0; i<t.length; i++){
+			j.push(i*gap + "px");
+		}
+
+		//left값의 배열이 j에 저장되는데 이 배열을 섞습니다.
+		shuffle(j);
+
+		//다시 클래스 아이템들에 새로운 left값을 지정합니다.
+		for(i=0; i<t.length; i++){
+			t[i].style.left = j[i];
+		}
+
+		//shuffle함수
+		function shuffle(a) {
+		    var j, x, i;
+		    for (i = a.length - 1; i > 0; i--) {
+		        j = Math.floor(Math.random() * (i + 1));
+		        x = a[i]; a[i] = a[j]; a[j] = x;
+		    }
+		    return a;
+		}
+	}
+	</script>
+</body>
+
+</html>
